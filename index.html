@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bo Su — BIM Automation Engineer / Revit API Developer</title>
-<meta name="description" content="Portfolio of Bo Su, BIM Automation Engineer and Revit API Developer specializing in pyRevit, Dynamo, and Unity-based BIM integrations.">
+<meta name="description" content="Portfolio of Bo Su, BIM Automation Engineer and Revit API Developer specializing in pyRevit, Dynamo, and Unity/HoloLens BIM pipelines.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div class="bg-glow" aria-hidden="true"></div>
+
 <header class="site-header">
   <div class="container header-inner">
-    <span class="brand">Bo Su</span>
+    <a class="brand" href="#top">Bo Su</a>
     <nav>
+      <a href="#pipeline">Pipeline</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
@@ -20,99 +23,152 @@
   </div>
 </header>
 
-<main>
+<main id="top">
   <section class="hero container">
+    <p class="eyebrow">BIM Automation Engineer / Revit API Developer</p>
     <h1>Bo Su</h1>
-    <p class="tagline">BIM Automation Engineer &amp; Revit API Developer</p>
     <p class="hero-desc">
-      I build tools that automate BIM workflows — from Revit ribbon add-ins and
-      pyRevit extensions that catch model QC issues, to WebSocket bridges that
-      sync Revit and Unity for real-time visualization and mixed reality.
+      I build tools that automate BIM workflows and connect Revit models to
+      other platforms — from Revit ribbon add-ins and pyRevit extensions
+      that catch model QC issues, to a full Revit → Unity → HoloLens 2
+      pipeline for reviewing models in mixed reality.
     </p>
     <div class="hero-links">
-      <a class="btn btn-primary" href="https://github.com/bsu-mt" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="https://github.com/bsu-mt" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+        GitHub
+      </a>
       <a class="btn" href="https://www.linkedin.com/in/bo-su-04a9b726a/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn" href="mailto:bsu12689@gmail.com">Email</a>
     </div>
   </section>
 
-  <section id="projects" class="projects container">
-    <h2>Projects</h2>
-    <div class="project-grid">
+  <section id="pipeline" class="pipeline container">
+    <div class="section-head">
+      <h2>Revit → Unity → HoloLens 2 pipeline</h2>
+      <p class="section-sub">
+        Three projects, one workflow: a live Revit model is exported and streamed
+        over WebSocket, picked up and turned into a Unity asset, then deployed to
+        HoloLens 2 for spatial, in-context review with Life Cycle Assessment data
+        attached.
+      </p>
+    </div>
 
-      <article class="project-card">
-        <h3><a href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">RevitQC</a></h3>
-        <p class="project-tag">pyRevit · Python</p>
-        <p>
-          A pyRevit extension that adds one-click model-QC tools to Revit's ribbon,
-          built around a Canadian HVAC (mechanical) project naming convention.
-          Automates checks that would otherwise mean manually eyeballing a model:
-        </p>
-        <ul>
-          <li><strong>NameChecker</strong> — validates HVAC type names (equipment, air terminals, ducts, pipes) against configurable regex rules.</li>
-          <li><strong>SizeChecker</strong> — flags duct/pipe sizes that don't match an approved standard sizing table.</li>
-          <li><strong>EquipmentChecker</strong> — flags equipment missing a tag, and air terminals missing a tag or with zero/blank airflow.</li>
-        </ul>
-        <p>Each rule set lives in an editable JSON file, and the core checking logic is Revit-independent and unit tested.</p>
-        <a class="project-link" href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
+    <div class="pipeline-track">
 
-      <article class="project-card">
+      <article class="stage-card">
+        <div class="stage-index">
+          <span class="stage-num">01</span>
+          <span class="stage-role">Export &amp; stream</span>
+        </div>
         <h3><a href="https://github.com/bsu-mt/RevitWebSocketAddin" target="_blank" rel="noopener">RevitWebSocketAddin</a></h3>
         <p class="project-tag">C# · Revit API · WebSocket</p>
         <p>
-          A Revit add-in that exports the active 3D view to OBJ/MTL and streams
-          the files over a raw WebSocket connection to an external server — built
-          to feed a live Revit model into Unity for visualization.
+          A Revit add-in that adds a custom <strong>Unity &amp; Revit Transfer</strong>
+          ribbon tab with an <strong>Export OBJ</strong> command. On click, it exports
+          the active document's first non-template 3D view to <code>.obj</code>/<code>.mtl</code>
+          using the Revit API, then streams both files to an external WebSocket server
+          in 8&nbsp;KB chunks.
         </p>
-        <ul>
-          <li>Adds a custom ribbon tab with an <strong>Export OBJ</strong> command that exports the active 3D view and uploads the mesh/material files in chunks.</li>
-          <li>Includes an experimental second application that keeps an open WebSocket connection for future live document-change syncing.</li>
+        <ul class="detail-list">
+          <li>Custom ribbon UI built via <code>IExternalApplication</code>, defined in <code>APP.cs</code>.</li>
+          <li><code>ExportButton.cs</code> handles the 3D-view export and chunked upload over a raw WebSocket connection (<code>websocket-sharp</code>).</li>
+          <li>A second, independent <code>IExternalApplication</code> (<code>RevitWebSocketClient.cs</code>) opens its own WebSocket connection at startup — reserved for future live document-change syncing; currently experimental.</li>
+          <li>Targets Revit 2026 / .NET Framework 4.8, built in Visual Studio.</li>
         </ul>
-        <p>Pairs with <a href="https://github.com/bsu-mt/UniWeb" target="_blank" rel="noopener">UniWeb</a> on the receiving end.</p>
         <a class="project-link" href="https://github.com/bsu-mt/RevitWebSocketAddin" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
 
-      <article class="project-card">
+      <div class="stage-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+
+      <article class="stage-card">
+        <div class="stage-index">
+          <span class="stage-num">02</span>
+          <span class="stage-role">Receive &amp; load</span>
+        </div>
         <h3><a href="https://github.com/bsu-mt/UniWeb" target="_blank" rel="noopener">UniWeb</a></h3>
         <p class="project-tag">C# · Unity Package · WebSocket</p>
         <p>
-          A Unity package that loads and saves BIM models — including materials —
-          from a WebSocket server, so a model exported from Revit can be streamed
-          straight into a Unity scene without a manual import step.
+          The Unity-side counterpart: a package (<code>WebSocketConnector</code>)
+          that connects to the same WebSocket server, lists the OBJ/MTL files
+          available, downloads a selection, and loads it straight into the
+          scene at runtime — no manual import step.
         </p>
-        <p>
-          Built as the Unity-side counterpart to
-          <a href="https://github.com/bsu-mt/RevitWebSocketAddin" target="_blank" rel="noopener">RevitWebSocketAddin</a>,
-          and structured as a drop-in Unity package (<code>Packages/WebSocketConnector</code>)
-          with editor and runtime components.
-        </p>
+        <ul class="detail-list">
+          <li><code>OBJImporter.cs</code> owns the WebSocket connection, downloads the OBJ/MTL pair, and loads it with a bundled runtime OBJ/MTL importer (Dummiesman).</li>
+          <li>Parses <code>.mtl</code> diffuse color (and optional diffuse texture) and rebinds it onto the loaded mesh's renderers.</li>
+          <li>Dockable <strong>Window → WebSocket Connector</strong> Editor panel to connect, list remote files, and load by selection or by name without writing code.</li>
+          <li><strong>Editor-only prefab export</strong> — saves the runtime-loaded meshes/materials as real project assets and connects them into a reusable prefab.</li>
+        </ul>
         <a class="project-link" href="https://github.com/bsu-mt/UniWeb" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
 
-      <article class="project-card">
+      <div class="stage-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+
+      <article class="stage-card">
+        <div class="stage-index">
+          <span class="stage-num">03</span>
+          <span class="stage-role">Visualize in MR</span>
+        </div>
         <h3><a href="https://github.com/bsu-mt/HoloLens-LCA-Viewer" target="_blank" rel="noopener">HoloLens LCA Viewer</a></h3>
         <p class="project-tag">C# · Unity · HoloLens 2 · Mixed Reality</p>
         <p>
-          A Unity mixed-reality project deployed to Microsoft HoloLens 2 for
-          visualizing a Revit-exported building model in place, with Life
-          Cycle Assessment (LCA) data attached to it for spatial, in-context
-          review.
+          The prefab UniWeb produces — a Revit-exported circular-economy steel
+          structure — is deployed to Microsoft HoloLens 2 as a spatially
+          anchored, interactable object, with Life Cycle Assessment (LCA)
+          data attached for in-context review.
         </p>
-        <p>
-          Built on Microsoft's Mixed Reality Toolkit (MRTK3) with XR
-          Interaction Toolkit support, letting users walk through and
-          interact with environmental-impact data overlaid on the building
-          model in situ.
-        </p>
+        <ul class="detail-list">
+          <li>Built on Microsoft's <strong>Mixed Reality Toolkit (MRTK3)</strong> plus Unity's XR Interaction Toolkit for hand/gaze interaction and spatial UI.</li>
+          <li>An <code>OpenUrlButton</code> component wires a UI button to open an external link — e.g. an LCA report or data source — from inside the scene.</li>
+          <li>Builds to Universal Windows Platform and deploys over USB or Wi-Fi via Device Portal, or runs in the HoloLens emulator.</li>
+          <li>Depends on the MRTK3 <code>org.mixedrealitytoolkit.*</code> packages, restored via Microsoft's Mixed Reality Feature Tool.</li>
+        </ul>
         <a class="project-link" href="https://github.com/bsu-mt/HoloLens-LCA-Viewer" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
 
     </div>
   </section>
 
+  <section id="projects" class="projects container">
+    <div class="section-head">
+      <h2>Other projects</h2>
+      <p class="section-sub">Standalone tools outside the pipeline above.</p>
+    </div>
+    <div class="project-grid">
+
+      <article class="project-card">
+        <h3><a href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">RevitQC</a></h3>
+        <p class="project-tag">pyRevit · Python</p>
+        <p>
+          A pyRevit extension that adds one-click model-QC tools to Revit's
+          ribbon, built around a Canadian HVAC (mechanical) project naming
+          convention. Turns checks that don't scale by hand — naming
+          violations, non-standard duct/pipe sizes, missing equipment tags —
+          into a ribbon button that can be run before every handover or
+          coordination meeting.
+        </p>
+        <ul class="detail-list">
+          <li><strong>NameChecker</strong> — validates HVAC type names (equipment, air terminals, ducts, pipes) against configurable regex rules in <code>rules/naming_rules.json</code>, e.g. <code>AHU-01</code>, <code>SA_RECT_600x300mm</code>. Reports violations in a markdown table.</li>
+          <li><strong>SizeChecker</strong> — flags duct/pipe sizes that don't match an approved standard sizing table in <code>rules/size_rules.json</code> (e.g. round ducts must be one of 100/125/150/…/900&nbsp;mm).</li>
+          <li><strong>EquipmentChecker</strong> — flags mechanical equipment missing a tag (Mark), and air terminals missing a tag or with zero/blank airflow.</li>
+          <li>Checking logic (<code>core_checker.py</code>, <code>size_checker.py</code>) is <strong>Revit-independent and unit tested</strong> — each has a standalone test runner (<code>tests/sample_data.py</code>, <code>tests/sample_size_data.py</code>) that exercises it against mock data with no Revit installation required.</li>
+          <li>Every rule set is a plain, editable JSON file, so the checks adapt to a different project's BIM execution plan without touching code.</li>
+        </ul>
+        <a class="project-link" href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+    </div>
+  </section>
+
   <section id="skills" class="skills container">
-    <h2>Skills</h2>
+    <div class="section-head">
+      <h2>Skills</h2>
+    </div>
     <div class="skills-grid">
       <div class="skill-group">
         <h3>BIM Automation &amp; Development</h3>
@@ -150,7 +206,7 @@
 
 <footer id="contact" class="site-footer">
   <div class="container">
-    <p>Get in touch</p>
+    <p class="footer-lead">Get in touch</p>
     <div class="hero-links">
       <a class="btn" href="mailto:bsu12689@gmail.com">bsu12689@gmail.com</a>
       <a class="btn" href="https://www.linkedin.com/in/bo-su-04a9b726a/" target="_blank" rel="noopener">LinkedIn</a>
