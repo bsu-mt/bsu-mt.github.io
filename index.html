@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bo Su — BIM Automation Engineer / Revit API Developer</title>
+<meta name="description" content="Portfolio of Bo Su, BIM Automation Engineer and Revit API Developer specializing in pyRevit, Dynamo, and Unity-based BIM integrations.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <span class="brand">Bo Su</span>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero container">
+    <h1>Bo Su</h1>
+    <p class="tagline">BIM Automation Engineer &amp; Revit API Developer</p>
+    <p class="hero-desc">
+      I build tools that automate BIM workflows — from Revit ribbon add-ins and
+      pyRevit extensions that catch model QC issues, to WebSocket bridges that
+      sync Revit and Unity for real-time visualization and mixed reality.
+    </p>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="https://github.com/bsu-mt" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/bo-su-04a9b726a/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="mailto:bsu12689@gmail.com">Email</a>
+    </div>
+  </section>
+
+  <section id="projects" class="projects container">
+    <h2>Projects</h2>
+    <div class="project-grid">
+
+      <article class="project-card">
+        <h3><a href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">RevitQC</a></h3>
+        <p class="project-tag">pyRevit · Python</p>
+        <p>
+          A pyRevit extension that adds one-click model-QC tools to Revit's ribbon,
+          built around a Canadian HVAC (mechanical) project naming convention.
+          Automates checks that would otherwise mean manually eyeballing a model:
+        </p>
+        <ul>
+          <li><strong>NameChecker</strong> — validates HVAC type names (equipment, air terminals, ducts, pipes) against configurable regex rules.</li>
+          <li><strong>SizeChecker</strong> — flags duct/pipe sizes that don't match an approved standard sizing table.</li>
+          <li><strong>EquipmentChecker</strong> — flags equipment missing a tag, and air terminals missing a tag or with zero/blank airflow.</li>
+        </ul>
+        <p>Each rule set lives in an editable JSON file, and the core checking logic is Revit-independent and unit tested.</p>
+        <a class="project-link" href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+      <article class="project-card">
+        <h3><a href="https://github.com/bsu-mt/RevitWebSocketAddin" target="_blank" rel="noopener">RevitWebSocketAddin</a></h3>
+        <p class="project-tag">C# · Revit API · WebSocket</p>
+        <p>
+          A Revit add-in that exports the active 3D view to OBJ/MTL and streams
+          the files over a raw WebSocket connection to an external server — built
+          to feed a live Revit model into Unity for visualization.
+        </p>
+        <ul>
+          <li>Adds a custom ribbon tab with an <strong>Export OBJ</strong> command that exports the active 3D view and uploads the mesh/material files in chunks.</li>
+          <li>Includes an experimental second application that keeps an open WebSocket connection for future live document-change syncing.</li>
+        </ul>
+        <p>Pairs with <a href="https://github.com/bsu-mt/UniWeb" target="_blank" rel="noopener">UniWeb</a> on the receiving end.</p>
+        <a class="project-link" href="https://github.com/bsu-mt/RevitWebSocketAddin" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+      <article class="project-card">
+        <h3><a href="https://github.com/bsu-mt/UniWeb" target="_blank" rel="noopener">UniWeb</a></h3>
+        <p class="project-tag">C# · Unity Package · WebSocket</p>
+        <p>
+          A Unity package that loads and saves BIM models — including materials —
+          from a WebSocket server, so a model exported from Revit can be streamed
+          straight into a Unity scene without a manual import step.
+        </p>
+        <p>
+          Built as the Unity-side counterpart to
+          <a href="https://github.com/bsu-mt/RevitWebSocketAddin" target="_blank" rel="noopener">RevitWebSocketAddin</a>,
+          and structured as a drop-in Unity package (<code>Packages/WebSocketConnector</code>)
+          with editor and runtime components.
+        </p>
+        <a class="project-link" href="https://github.com/bsu-mt/UniWeb" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+      <article class="project-card">
+        <h3><a href="https://github.com/bsu-mt/MR_LCA" target="_blank" rel="noopener">MR_LCA</a></h3>
+        <p class="project-tag">C# · Unity · HoloLens · Mixed Reality</p>
+        <p>
+          A Unity mixed-reality project deployed to HoloLens for visualizing and
+          interacting with building models, integrating Life Cycle Assessment
+          (LCA) data directly into the spatial view.
+        </p>
+        <p>
+          Built on Microsoft's Mixed Reality Toolkit (MRTK) with XR Interaction
+          Toolkit support, letting users walk through and interact with
+          environmental-impact data overlaid on the building model in situ.
+        </p>
+        <a class="project-link" href="https://github.com/bsu-mt/MR_LCA" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="skills" class="skills container">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>BIM Automation &amp; Development</h3>
+        <ul>
+          <li>Revit API</li>
+          <li>pyRevit</li>
+          <li>Dynamo</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Programming</h3>
+        <ul>
+          <li>C#</li>
+          <li>Python</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>AEC Software</h3>
+        <ul>
+          <li>Revit</li>
+          <li>Navisworks</li>
+          <li>Rhino</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Tools &amp; Workflow</h3>
+        <ul>
+          <li>Git</li>
+          <li>MS Office</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact" class="site-footer">
+  <div class="container">
+    <p>Get in touch</p>
+    <div class="hero-links">
+      <a class="btn" href="mailto:bsu12689@gmail.com">bsu12689@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/bo-su-04a9b726a/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/bsu-mt" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="copyright">&copy; 2026 Bo Su</p>
+  </div>
+</footer>
+
+</body>
+</html>
