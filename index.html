@@ -16,6 +16,7 @@
     <a class="brand" href="#top">Bo Su</a>
     <nav>
       <a href="#pipeline">Pipeline</a>
+      <a href="#robotstudio">In Development</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
@@ -61,7 +62,7 @@
           <span class="stage-num">01</span>
           <span class="stage-role">Export &amp; stream</span>
         </div>
-        <h3><a href="https://github.com/bsu-mt/RevitWebSocketAddin" target="_blank" rel="noopener">RevitWebSocketAddin</a></h3>
+        <h3><a href="https://github.com/bsu-mt/Revit-Exporter-to-WebSocket-Server" target="_blank" rel="noopener">Revit Exporter to WebSocket Server</a></h3>
         <p class="project-tag">C# · Revit API · WebSocket</p>
         <p>
           A Revit add-in that adds a custom <strong>Unity &amp; Revit Transfer</strong>
@@ -76,7 +77,7 @@
           <li>A second, independent <code>IExternalApplication</code> (<code>RevitWebSocketClient.cs</code>) opens its own WebSocket connection at startup — reserved for future live document-change syncing; currently experimental.</li>
           <li>Targets Revit 2026 / .NET Framework 4.8, built in Visual Studio.</li>
         </ul>
-        <a class="project-link" href="https://github.com/bsu-mt/RevitWebSocketAddin" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="project-link" href="https://github.com/bsu-mt/Revit-Exporter-to-WebSocket-Server" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
 
       <div class="stage-arrow" aria-hidden="true">
@@ -88,7 +89,7 @@
           <span class="stage-num">02</span>
           <span class="stage-role">Receive &amp; load</span>
         </div>
-        <h3><a href="https://github.com/bsu-mt/UniWeb" target="_blank" rel="noopener">UniWeb</a></h3>
+        <h3><a href="https://github.com/bsu-mt/Unity-Importer-from-WebSocket-Server" target="_blank" rel="noopener">Unity Importer from WebSocket Server</a></h3>
         <p class="project-tag">C# · Unity Package · WebSocket</p>
         <p>
           The Unity-side counterpart: a package (<code>WebSocketConnector</code>)
@@ -102,7 +103,7 @@
           <li>Dockable <strong>Window → WebSocket Connector</strong> Editor panel to connect, list remote files, and load by selection or by name without writing code.</li>
           <li><strong>Editor-only prefab export</strong> — saves the runtime-loaded meshes/materials as real project assets and connects them into a reusable prefab.</li>
         </ul>
-        <a class="project-link" href="https://github.com/bsu-mt/UniWeb" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="project-link" href="https://github.com/bsu-mt/Unity-Importer-from-WebSocket-Server" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
 
       <div class="stage-arrow" aria-hidden="true">
@@ -114,13 +115,13 @@
           <span class="stage-num">03</span>
           <span class="stage-role">Visualize in MR</span>
         </div>
-        <h3><a href="https://github.com/bsu-mt/HoloLens-LCA-Viewer" target="_blank" rel="noopener">HoloLens LCA Viewer</a></h3>
+        <h3><a href="https://github.com/bsu-mt/HoloLens-Viewer-for-Unity" target="_blank" rel="noopener">HoloLens Viewer for Unity</a></h3>
         <p class="project-tag">C# · Unity · HoloLens 2 · Mixed Reality</p>
         <p>
-          The prefab UniWeb produces — a Revit-exported circular-economy steel
-          structure — is deployed to Microsoft HoloLens 2 as a spatially
-          anchored, interactable object, with Life Cycle Assessment (LCA)
-          data attached for in-context review.
+          The prefab the Unity importer produces — a Revit-exported
+          circular-economy steel structure — is deployed to Microsoft
+          HoloLens 2 as a spatially anchored, interactable object, with Life
+          Cycle Assessment (LCA) data attached for in-context review.
         </p>
         <ul class="detail-list">
           <li>Built on Microsoft's <strong>Mixed Reality Toolkit (MRTK3)</strong> plus Unity's XR Interaction Toolkit for hand/gaze interaction and spatial UI.</li>
@@ -128,7 +129,73 @@
           <li>Builds to Universal Windows Platform and deploys over USB or Wi-Fi via Device Portal, or runs in the HoloLens emulator.</li>
           <li>Depends on the MRTK3 <code>org.mixedrealitytoolkit.*</code> packages, restored via Microsoft's Mixed Reality Feature Tool.</li>
         </ul>
-        <a class="project-link" href="https://github.com/bsu-mt/HoloLens-LCA-Viewer" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="project-link" href="https://github.com/bsu-mt/HoloLens-Viewer-for-Unity" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="robotstudio" class="pipeline pipeline-wip container">
+    <div class="section-head">
+      <span class="wip-badge">In development</span>
+      <h2>RobotStudio → Unity → Quest 2 pipeline</h2>
+      <p class="section-sub">
+        An active research &amp; prototyping project: exporting an ABB
+        RobotStudio robot-arm assembly simulation — geometry, joint motion,
+        and I/O signal timelines — into a package a Unity app can play back
+        interactively on Meta Quest 2, for reviewing an automated assembly
+        sequence away from the robot itself.
+      </p>
+    </div>
+
+    <div class="pipeline-track">
+
+      <article class="stage-card stage-card-wip">
+        <div class="stage-index">
+          <span class="stage-num">01</span>
+          <span class="stage-role">Export (research &amp; prototyping)</span>
+        </div>
+        <h3><a href="https://github.com/bsu-mt/RobotStudio-Exporter-for-Unity" target="_blank" rel="noopener">RobotStudio Exporter for Unity</a></h3>
+        <p class="project-tag">C# · RobotStudio SDK · FreeCAD</p>
+        <p>
+          A planned RobotStudio add-in that packages a station's per-link
+          geometry, joint motion timeline, and I/O signal timeline into one
+          Unity-importable export — in a single export action, for any
+          RobotStudio station, not one hardcoded demo.
+        </p>
+        <ul class="detail-list">
+          <li>The joint motion and signal timelines don't exist as exportable files in RobotStudio — they're transient simulation state, so capturing them means hooking the <code>SimulationController</code>/<code>Mechanism</code> and <code>IOSystem</code> signal-changed events programmatically while the simulation plays.</li>
+          <li>Geometry conversion is a two-stage pipeline under the hood: RobotStudio-side per-link export (STEP), then an automated FreeCAD pass into a Unity-friendly format (FBX/glTF) — one action from the user's perspective.</li>
+          <li>Also captures a joint-hierarchy manifest (parent/child structure, offsets, axes, limits) so the Unity side can reassemble a correctly-jointed rig without hand-authoring it.</li>
+          <li><strong>Status: skeleton only.</strong> No RobotStudio API integration code yet — next step is confirming which <code>ABB.Robotics.*</code> DLL set an add-in needs before building the real export logic.</li>
+        </ul>
+        <a class="project-link" href="https://github.com/bsu-mt/RobotStudio-Exporter-for-Unity" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+      <div class="stage-arrow stage-arrow-wip" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+
+      <article class="stage-card stage-card-wip">
+        <div class="stage-index">
+          <span class="stage-num">02</span>
+          <span class="stage-role">Import &amp; playback (test harness)</span>
+        </div>
+        <h3><a href="https://github.com/bsu-mt/Unity-Importer-from-RobotStudio" target="_blank" rel="noopener">Unity Importer from RobotStudio</a></h3>
+        <p class="project-tag">C# · Unity 6.3 LTS · Meta Quest 2 · OpenXR</p>
+        <p>
+          A Unity/Quest 2 test harness that will import the exporter's
+          package and play the assembly sequence back interactively — play,
+          pause, and step through it, with live inspection of every tracked
+          I/O signal at any point in time.
+        </p>
+        <ul class="detail-list">
+          <li>Built on Unity 6.3 LTS (URP), targeting Meta Quest 2 via OpenXR + the Meta XR SDK.</li>
+          <li>Current demo data is deliberately placeholder: an IRB4600 stands in for the target IRB5720 hardware, motion is linear-interpolated between start/end joint angles (flagged in code as <code>PlaceholderLerpJoints</code>) pending real waypoint data, and signal timing is hardcoded pending a real signal export — all structured to match the eventual export schema so real data can drop in later.</li>
+          <li><strong>Status: early / v0.</strong> Project skeleton is done — XR rig, ground plane, and an Editor-only XR Interaction Simulator for testing without a headset. Import logic, rig assembly, timeline playback, and the signal panel UI haven't been started yet.</li>
+          <li>On-device Quest 2 builds are blocked until Android Build Support is added to the Unity install — currently Windows Standalone only.</li>
+        </ul>
+        <a class="project-link" href="https://github.com/bsu-mt/Unity-Importer-from-RobotStudio" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
 
     </div>
@@ -137,7 +204,7 @@
   <section id="projects" class="projects container">
     <div class="section-head">
       <h2>Other projects</h2>
-      <p class="section-sub">Standalone tools outside the pipeline above.</p>
+      <p class="section-sub">Standalone tools outside the pipelines above.</p>
     </div>
     <div class="project-grid">
 
