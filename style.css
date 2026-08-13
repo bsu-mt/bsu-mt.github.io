@@ -68,12 +68,21 @@ code {
   padding-bottom: 18px;
 }
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--text);
   letter-spacing: -0.01em;
 }
 .brand:hover { text-decoration: none; }
+.brand-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+}
 .site-header nav a {
   color: var(--text-muted);
   margin-left: 26px;
