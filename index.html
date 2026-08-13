@@ -196,14 +196,16 @@
 
       <article class="project-card">
         <h3><a href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">RevitQC</a></h3>
-        <p class="project-tag">pyRevit · Python</p>
+        <p class="project-tag">pyRevit · Python · LLM tool-calling</p>
         <p>
           A pyRevit extension that adds one-click model-QC tools to Revit's
           ribbon, built around a Canadian HVAC (mechanical) project naming
           convention. Turns checks that don't scale by hand — naming
           violations, non-standard duct/pipe sizes, missing equipment tags —
           into a ribbon button that can be run before every handover or
-          coordination meeting.
+          coordination meeting. Rule tables are grounded in real standards
+          (SMACNA duct sizes, ASME B36.10M/19M pipe sizes, ASHRAE equipment
+          terminology) rather than made up.
         </p>
         <ul class="detail-list">
           <li><strong>NameChecker</strong> — validates HVAC type names (equipment, air terminals, ducts, pipes) against configurable regex rules in <code>rules/naming_rules.json</code>, e.g. <code>AHU-01</code>, <code>SA_RECT_600x300mm</code>. Reports violations in a markdown table.</li>
@@ -211,6 +213,7 @@
           <li><strong>EquipmentChecker</strong> — flags mechanical equipment missing a tag (Mark), and air terminals missing a tag or with zero/blank airflow.</li>
           <li>Checking logic (<code>core_checker.py</code>, <code>size_checker.py</code>) is <strong>Revit-independent and unit tested</strong> — each has a standalone test runner (<code>tests/sample_data.py</code>, <code>tests/sample_size_data.py</code>) that exercises it against mock data with no Revit installation required.</li>
           <li>Every rule set is a plain, editable JSON file, so the checks adapt to a different project's BIM execution plan without touching code.</li>
+          <li><strong>AI Copilot (prototype)</strong> — a natural-language front end (<code>ai_copilot_demo.py</code>) that lets an engineer ask a plain-English question and has an LLM pick the right check to run, via a swappable <code>LLMProvider</code> interface: free/local through <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>, or a hosted Claude model with no code changes elsewhere.</li>
         </ul>
         <a class="project-link" href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
