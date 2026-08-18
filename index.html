@@ -15,9 +15,9 @@
   <div class="container header-inner">
     <a class="brand" href="#top"><img src="logo.png" alt="Bo Su logo" class="brand-logo">Bo Su</a>
     <nav>
-      <a href="#pipeline">Pipeline</a>
-      <a href="#robotstudio">In Development</a>
-      <a href="#projects">Projects</a>
+      <a href="#bim-automation">BIM Automation</a>
+      <a href="#bim-xr">BIM-XR</a>
+      <a href="#personal-tools">Personal Tools</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -31,8 +31,8 @@
     <p class="hero-desc">
       I build tools that automate BIM workflows and connect Revit models to
       other platforms — from Revit ribbon add-ins and pyRevit extensions
-      that catch model QC issues, to a full Revit → Unity → HoloLens 2
-      pipeline for reviewing models in mixed reality.
+      that catch model QC issues, to Revit/RobotStudio → Unity XR
+      pipelines for reviewing models in mixed reality.
     </p>
     <div class="hero-links">
       <a class="btn btn-primary" href="https://github.com/bsu-mt" target="_blank" rel="noopener">
@@ -44,180 +44,94 @@
     </div>
   </section>
 
-  <section id="pipeline" class="pipeline container">
+  <section id="bim-automation" class="projects container">
     <div class="section-head">
-      <h2>Revit → Unity → HoloLens 2 pipeline</h2>
-      <p class="section-sub">
-        Three projects, one workflow: a live Revit model is exported and streamed
-        over WebSocket, picked up and turned into a Unity asset, then deployed to
-        HoloLens 2 for spatial, in-context review with Life Cycle Assessment data
-        attached.
-      </p>
-    </div>
-
-    <div class="pipeline-track">
-
-      <div class="stage">
-        <div class="stage-marker"><span class="num">01</span><span class="line"></span></div>
-        <div class="stage-body">
-          <p class="stage-role">Export &amp; stream</p>
-          <h3><a href="https://github.com/bsu-mt/Revit-Exporter-to-WebSocket-Server" target="_blank" rel="noopener">Revit Exporter to WebSocket Server</a></h3>
-          <p class="project-tag">C# · Revit API · WebSocket</p>
-          <p>
-            A Revit add-in that adds a custom <strong>Unity &amp; Revit Transfer</strong>
-            ribbon tab with an <strong>Export OBJ</strong> command. On click, it exports
-            the active document's first non-template 3D view to <code>.obj</code>/<code>.mtl</code>
-            using the Revit API, then streams both files to an external WebSocket server
-            in 8&nbsp;KB chunks.
-          </p>
-          <ul class="detail-list">
-            <li>Custom ribbon UI built via <code>IExternalApplication</code>, defined in <code>APP.cs</code>.</li>
-            <li><code>ExportButton.cs</code> handles the 3D-view export and chunked upload over a raw WebSocket connection (<code>websocket-sharp</code>).</li>
-            <li>A second, independent <code>IExternalApplication</code> (<code>RevitWebSocketClient.cs</code>) opens its own WebSocket connection at startup — reserved for future live document-change syncing; currently experimental.</li>
-            <li>Targets Revit 2026 / .NET Framework 4.8, built in Visual Studio.</li>
-          </ul>
-          <a class="project-link" href="https://github.com/bsu-mt/Revit-Exporter-to-WebSocket-Server" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </div>
-
-      <div class="stage">
-        <div class="stage-marker"><span class="num">02</span><span class="line"></span></div>
-        <div class="stage-body">
-          <p class="stage-role">Receive &amp; load</p>
-          <h3><a href="https://github.com/bsu-mt/Unity-Importer-from-WebSocket-Server" target="_blank" rel="noopener">Unity Importer from WebSocket Server</a></h3>
-          <p class="project-tag">C# · Unity Package · WebSocket</p>
-          <p>
-            The Unity-side counterpart: a package (<code>WebSocketConnector</code>)
-            that connects to the same WebSocket server, lists the OBJ/MTL files
-            available, downloads a selection, and loads it straight into the
-            scene at runtime — no manual import step.
-          </p>
-          <ul class="detail-list">
-            <li><code>OBJImporter.cs</code> owns the WebSocket connection, downloads the OBJ/MTL pair, and loads it with a bundled runtime OBJ/MTL importer (Dummiesman).</li>
-            <li>Parses <code>.mtl</code> diffuse color (and optional diffuse texture) and rebinds it onto the loaded mesh's renderers.</li>
-            <li>Dockable <strong>Window → WebSocket Connector</strong> Editor panel to connect, list remote files, and load by selection or by name without writing code.</li>
-            <li><strong>Editor-only prefab export</strong> — saves the runtime-loaded meshes/materials as real project assets and connects them into a reusable prefab.</li>
-          </ul>
-          <a class="project-link" href="https://github.com/bsu-mt/Unity-Importer-from-WebSocket-Server" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </div>
-
-      <div class="stage">
-        <div class="stage-marker"><span class="num">03</span><span class="line"></span></div>
-        <div class="stage-body">
-          <p class="stage-role">Visualize in MR</p>
-          <h3><a href="https://github.com/bsu-mt/HoloLens-Viewer-for-Unity" target="_blank" rel="noopener">HoloLens Viewer for Unity</a></h3>
-          <p class="project-tag">C# · Unity · HoloLens 2 · Mixed Reality</p>
-          <p>
-            The prefab the Unity importer produces — a Revit-exported
-            circular-economy steel structure — is deployed to Microsoft
-            HoloLens 2 as a spatially anchored, interactable object, with Life
-            Cycle Assessment (LCA) data attached for in-context review.
-          </p>
-          <ul class="detail-list">
-            <li>Built on Microsoft's <strong>Mixed Reality Toolkit (MRTK3)</strong> plus Unity's XR Interaction Toolkit for hand/gaze interaction and spatial UI.</li>
-            <li>An <code>OpenUrlButton</code> component wires a UI button to open an external link — e.g. an LCA report or data source — from inside the scene.</li>
-            <li>Builds to Universal Windows Platform and deploys over USB or Wi-Fi via Device Portal, or runs in the HoloLens emulator.</li>
-            <li>Depends on the MRTK3 <code>org.mixedrealitytoolkit.*</code> packages, restored via Microsoft's Mixed Reality Feature Tool.</li>
-          </ul>
-          <a class="project-link" href="https://github.com/bsu-mt/HoloLens-Viewer-for-Unity" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="robotstudio" class="pipeline pipeline-wip container">
-    <div class="section-head">
-      <span class="wip-badge">In development</span>
-      <h2>RobotStudio → Unity → Quest 2 pipeline</h2>
-      <p class="section-sub">
-        An active research &amp; prototyping project: exporting an ABB
-        RobotStudio robot-arm assembly simulation — geometry, joint motion,
-        and I/O signal timelines — into a package a Unity app can play back
-        interactively on Meta Quest 2, for reviewing an automated assembly
-        sequence away from the robot itself.
-      </p>
-    </div>
-
-    <div class="pipeline-track">
-
-      <div class="stage">
-        <div class="stage-marker"><span class="num">01</span><span class="line"></span></div>
-        <div class="stage-body">
-          <p class="stage-role">Export (research &amp; prototyping)</p>
-          <h3><a href="https://github.com/bsu-mt/RobotStudio-Exporter-for-Unity" target="_blank" rel="noopener">RobotStudio Exporter for Unity</a></h3>
-          <p class="project-tag">C# · RobotStudio SDK · FreeCAD</p>
-          <p>
-            A planned RobotStudio add-in that packages a station's per-link
-            geometry, joint motion timeline, and I/O signal timeline into one
-            Unity-importable export — in a single export action, for any
-            RobotStudio station, not one hardcoded demo.
-          </p>
-          <ul class="detail-list">
-            <li>The joint motion and signal timelines don't exist as exportable files in RobotStudio — they're transient simulation state, so capturing them means hooking the <code>SimulationController</code>/<code>Mechanism</code> and <code>IOSystem</code> signal-changed events programmatically while the simulation plays.</li>
-            <li>Geometry conversion is a two-stage pipeline under the hood: RobotStudio-side per-link export (STEP), then an automated FreeCAD pass into a Unity-friendly format (FBX/glTF) — one action from the user's perspective.</li>
-            <li>Also captures a joint-hierarchy manifest (parent/child structure, offsets, axes, limits) so the Unity side can reassemble a correctly-jointed rig without hand-authoring it.</li>
-            <li><strong>Status: skeleton only.</strong> No RobotStudio API integration code yet — next step is confirming which <code>ABB.Robotics.*</code> DLL set an add-in needs before building the real export logic.</li>
-          </ul>
-          <a class="project-link" href="https://github.com/bsu-mt/RobotStudio-Exporter-for-Unity" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </div>
-
-      <div class="stage">
-        <div class="stage-marker"><span class="num">02</span><span class="line"></span></div>
-        <div class="stage-body">
-          <p class="stage-role">Import &amp; playback (test harness)</p>
-          <h3><a href="https://github.com/bsu-mt/Unity-Importer-from-RobotStudio" target="_blank" rel="noopener">Unity Importer from RobotStudio</a></h3>
-          <p class="project-tag">C# · Unity 6.3 LTS · Meta Quest 2 · OpenXR</p>
-          <p>
-            A Unity/Quest 2 test harness that will import the exporter's
-            package and play the assembly sequence back interactively — play,
-            pause, and step through it, with live inspection of every tracked
-            I/O signal at any point in time.
-          </p>
-          <ul class="detail-list">
-            <li>Built on Unity 6.3 LTS (URP), targeting Meta Quest 2 via OpenXR + the Meta XR SDK.</li>
-            <li>Current demo data is deliberately placeholder: an IRB4600 stands in for the target IRB5720 hardware, motion is linear-interpolated between start/end joint angles (flagged in code as <code>PlaceholderLerpJoints</code>) pending real waypoint data, and signal timing is hardcoded pending a real signal export — all structured to match the eventual export schema so real data can drop in later.</li>
-            <li><strong>Status: early / v0.</strong> Project skeleton is done — XR rig, ground plane, and an Editor-only XR Interaction Simulator for testing without a headset. Import logic, rig assembly, timeline playback, and the signal panel UI haven't been started yet.</li>
-            <li>On-device Quest 2 builds are blocked until Android Build Support is added to the Unity install — currently Windows Standalone only.</li>
-          </ul>
-          <a class="project-link" href="https://github.com/bsu-mt/Unity-Importer-from-RobotStudio" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="projects" class="projects container">
-    <div class="section-head">
-      <h2>Other projects</h2>
-      <p class="section-sub">Standalone tools outside the pipelines above.</p>
+      <h2>BIM Automation</h2>
+      <p class="section-sub">pyRevit / Revit-API tooling for model QC and automation.</p>
     </div>
     <div class="project-grid">
 
       <article class="project-card">
+        <div class="project-gallery">
+          <img src="images/revitqc1.png" alt="RevitQC ribbon in Revit" loading="lazy">
+          <img src="images/revitqc2.png" alt="RevitQC naming check results" loading="lazy">
+          <img src="images/revitqc3.png" alt="RevitQC AI Copilot prompt" loading="lazy">
+          <img src="images/revitqc4.png" alt="RevitQC AI Copilot answer" loading="lazy">
+        </div>
         <h3><a href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">RevitQC</a></h3>
         <p class="project-tag">pyRevit · Python · LLM tool-calling</p>
         <p>
-          A pyRevit extension that adds one-click model-QC tools to Revit's
-          ribbon, built around a Canadian HVAC (mechanical) project naming
-          convention. Turns checks that don't scale by hand — naming
-          violations, non-standard duct/pipe sizes, missing equipment tags —
-          into a ribbon button that can be run before every handover or
-          coordination meeting. Rule tables are grounded in real standards
-          (SMACNA duct sizes, ASME B36.10M/19M pipe sizes, ASHRAE equipment
-          terminology) rather than made up.
+          One-click model-QC checks on Revit's ribbon — naming conventions,
+          duct/pipe sizing, equipment tagging — plus an AI Copilot for
+          plain-English queries against the open model.
         </p>
-        <ul class="detail-list">
-          <li><strong>NameChecker</strong> — validates HVAC type names (equipment, air terminals, ducts, pipes) against configurable regex rules in <code>rules/naming_rules.json</code>, e.g. <code>AHU-01</code>, <code>SA_RECT_600x300mm</code>. Reports violations in a markdown table.</li>
-          <li><strong>SizeChecker</strong> — flags duct/pipe sizes that don't match an approved standard sizing table in <code>rules/size_rules.json</code> (e.g. round ducts must be one of 100/125/150/…/900&nbsp;mm).</li>
-          <li><strong>EquipmentChecker</strong> — flags mechanical equipment missing a tag (Mark), and air terminals missing a tag or with zero/blank airflow.</li>
-          <li>Checking logic (<code>core_checker.py</code>, <code>size_checker.py</code>) is <strong>Revit-independent and unit tested</strong> — each has a standalone test runner (<code>tests/sample_data.py</code>, <code>tests/sample_size_data.py</code>) that exercises it against mock data with no Revit installation required.</li>
-          <li>Every rule set is a plain, editable JSON file, so the checks adapt to a different project's BIM execution plan without touching code.</li>
-          <li><strong>AI Copilot</strong> — a ribbon button that lets an engineer ask a plain-English question and has an LLM pick the right check, running it live against the currently open Revit document. Also usable standalone outside Revit via <code>ai_copilot_demo.py</code> against mock data. Backed by a swappable <code>LLMProvider</code> interface: free/local through <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>, or a hosted Claude model with no code changes elsewhere.</li>
-        </ul>
         <a class="project-link" href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="bim-xr" class="projects container">
+    <div class="section-head">
+      <h2>BIM-XR</h2>
+      <p class="section-sub">Pipelines connecting BIM/simulation tools to XR headsets for spatial, in-context review.</p>
+    </div>
+    <div class="project-grid">
+
+      <article class="project-card">
+        <div class="project-gallery">
+          <img src="images/revit-hololens-pipeline1.png" alt="Full Revit-to-HoloLens pipeline diagram, including Dynamo and LCA analysis" loading="lazy">
+          <img src="images/revit-hololens-pipeline2.png" alt="Unity scene showing the imported Revit model with LCA results UI" loading="lazy">
+          <img src="images/revit-hololens-pipeline3.png" alt="HoloLens 2 mixed-reality deployment with on-site LCA visualization" loading="lazy">
+        </div>
+        <h3><a href="https://github.com/bsu-mt/HoloLens-Viewer-for-Unity" target="_blank" rel="noopener">Revit → Unity → HoloLens 2 pipeline</a></h3>
+        <p class="project-tag">C# · Revit API · Unity · HoloLens 2</p>
+        <p>
+          A live Revit model is exported over WebSocket, imported into Unity,
+          and deployed to HoloLens 2 for spatially anchored mixed-reality
+          review with Life Cycle Assessment data attached.
+        </p>
+        <p class="image-note">
+          The first image shows the full project this pipeline is part of —
+          Dynamo design-alternative generation and One Click LCA sustainability
+          analysis included. The repos here cover only the highlighted step:
+          transferring model geometry and material from Revit to Unity over
+          WebSocket.
+        </p>
+        <a class="project-link" href="https://github.com/bsu-mt/HoloLens-Viewer-for-Unity" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+      <article class="project-card">
+        <span class="wip-badge">In development</span>
+        <h3><a href="https://github.com/bsu-mt/Unity-Importer-from-RobotStudio" target="_blank" rel="noopener">RobotStudio → Unity → Quest 2 pipeline</a></h3>
+        <p class="project-tag">C# · RobotStudio SDK · Unity · Meta Quest 2</p>
+        <p>
+          Exporting an ABB RobotStudio robot-arm assembly simulation —
+          geometry, joint motion, I/O signals — into a package a Unity app
+          can play back interactively on Meta Quest 2.
+        </p>
+        <a class="project-link" href="https://github.com/bsu-mt/Unity-Importer-from-RobotStudio" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="personal-tools" class="projects container">
+    <div class="section-head">
+      <h2>Personal Automation Tools</h2>
+      <p class="section-sub">Small stdlib-only tools for automating personal workflows.</p>
+    </div>
+    <div class="project-grid">
+
+      <article class="project-card">
+        <img class="project-shot" src="images/wiztreeanalyst.png" alt="WizTreeAnalyst GUI showing a folder size comparison" loading="lazy">
+        <h3><a href="https://github.com/bsu-mt/WizTreeAnalyst" target="_blank" rel="noopener">WizTreeAnalyst</a></h3>
+        <p class="project-tag">Python · Tkinter · stdlib only</p>
+        <p>
+          Tracks what's growing on my drives over time by diffing periodic
+          WizTree CSV exports — Tkinter GUI, no third-party dependencies.
+        </p>
+        <a class="project-link" href="https://github.com/bsu-mt/WizTreeAnalyst" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
 
     </div>
@@ -262,6 +176,10 @@
   </section>
 </main>
 
+<dialog id="lightbox">
+  <img id="lightbox-img" src="" alt="">
+</dialog>
+
 <footer id="contact" class="site-footer">
   <div class="container">
     <p class="footer-lead">Get in touch</p>
@@ -273,6 +191,22 @@
     <p class="copyright">&copy; 2026 Bo Su</p>
   </div>
 </footer>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.project-shot, .project-gallery img').forEach(img => {
+    img.classList.add('zoomable');
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.showModal();
+    });
+  });
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) lightbox.close();
+  });
+</script>
 
 </body>
 </html>

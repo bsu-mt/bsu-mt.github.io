@@ -141,10 +141,11 @@ code {
 .btn-primary:hover { background: #35332d; border-color: #35332d; }
 
 /* Sections */
-section { padding: 52px 28px; border-bottom: 1px solid var(--border); }
+section { padding: 88px 28px 64px; border-bottom: 1px solid var(--border); }
+section.projects { padding-bottom: 72px; }
 main > section:last-child { border-bottom: none; }
 
-.section-head { margin-bottom: 32px; }
+.section-head { margin-bottom: 24px; }
 .section-head h2 {
   font-size: 1.4rem;
   margin: 0 0 8px;
@@ -265,8 +266,8 @@ main > section:last-child { border-bottom: none; }
 /* Projects (standalone grid) */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 4px;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 .project-card {
   background: var(--card);
@@ -280,6 +281,56 @@ main > section:last-child { border-bottom: none; }
 .project-card h3 a { color: var(--text); }
 .project-card h3 a:hover { color: var(--accent); }
 .project-card .project-link { margin-top: auto; padding-top: 6px; }
+
+.project-shot {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 0 0 14px;
+}
+.project-card .wip-badge { margin-bottom: 10px; }
+
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+  margin: 0 0 14px;
+}
+.project-gallery img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.image-note {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  font-style: italic;
+  margin: -8px 0 14px;
+}
+
+.zoomable { cursor: zoom-in; }
+
+#lightbox {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: 92vw;
+  max-height: 92vh;
+}
+#lightbox::backdrop { background: rgba(0, 0, 0, 0.8); }
+#lightbox img {
+  display: block;
+  max-width: 92vw;
+  max-height: 92vh;
+  border-radius: var(--radius);
+  cursor: zoom-out;
+}
 
 /* Skills */
 .skills-grid {
