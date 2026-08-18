@@ -215,7 +215,7 @@
           <li><strong>EquipmentChecker</strong> — flags mechanical equipment missing a tag (Mark), and air terminals missing a tag or with zero/blank airflow.</li>
           <li>Checking logic (<code>core_checker.py</code>, <code>size_checker.py</code>) is <strong>Revit-independent and unit tested</strong> — each has a standalone test runner (<code>tests/sample_data.py</code>, <code>tests/sample_size_data.py</code>) that exercises it against mock data with no Revit installation required.</li>
           <li>Every rule set is a plain, editable JSON file, so the checks adapt to a different project's BIM execution plan without touching code.</li>
-          <li><strong>AI Copilot (prototype)</strong> — a natural-language front end (<code>ai_copilot_demo.py</code>) that lets an engineer ask a plain-English question and has an LLM pick the right check to run, via a swappable <code>LLMProvider</code> interface: free/local through <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>, or a hosted Claude model with no code changes elsewhere.</li>
+          <li><strong>AI Copilot</strong> — a ribbon button that lets an engineer ask a plain-English question and has an LLM pick the right check, running it live against the currently open Revit document. Also usable standalone outside Revit via <code>ai_copilot_demo.py</code> against mock data. Backed by a swappable <code>LLMProvider</code> interface: free/local through <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>, or a hosted Claude model with no code changes elsewhere.</li>
         </ul>
         <a class="project-link" href="https://github.com/bsu-mt/RevitQC" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
